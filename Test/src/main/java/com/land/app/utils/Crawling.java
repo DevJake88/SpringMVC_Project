@@ -46,16 +46,15 @@ public class Crawling {
 					String img = element.select("img").attr("src");
 					String writingSource = element.select("dd span.writing").text();
 					String date = "2023.03.23";
-					NewsVO nv = new NewsVO(1,title, content, date, href, img, writingSource);
+					NewsVO nv = new NewsVO(title, content, date, href, img, writingSource);
 					
 					// 똑같은 제목의 기사가 있는지 중복 검사
-					if(!hm.containsKey(title)) {
-						hm.put(title, title);
+					if(!hm.containsKey(content)) {
+						hm.put(content, content);
 						list.add(nv);
 					}
 				}
 			}
-			
 			
 		} catch (IOException e) {
 			e.printStackTrace();

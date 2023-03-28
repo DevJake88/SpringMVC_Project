@@ -7,4 +7,51 @@
 		select *
 		from tbl_news
 	</select>
+
+	<insert id="insertList" parameterType="java.util.List">
+
+		INSERT ALL
+
+		<foreach collection="list" item="item" index="index" open=""
+			separator=" " close="SELECT * FROM DUAL">
+
+			INTO tbl_news
+			(title, content, writer, href, img, regdate)
+			VALUES (
+			#{item.title},
+			#{item.content},
+			#{item.writingSource},
+			#{item.href},
+			#{item.img},
+			#{item.date}
+			)
+
+		</foreach>
+
+	</insert>
+
+	<!-- <update id="insertList" parameterType="java.util.List">
+		<foreach collection="list" item="item" open="INSERT ALL"
+			close="SELECT * FROM DUAL" separator=" ">
+			INSERT INTO tbl_news(
+			nno, title,
+			content, writer, href, img, regdate
+			)
+			VALUES (
+			seq_news.nextval,
+			#{item.title},
+			#{item.content},
+			#{item.writingSource},
+			#{item.href},
+			#{item.img},
+			#{item.date}
+			)
+		</foreach>
+	</update> -->
+
+	<!-- <insert id="insertList" parameterType="java.util.List"> INSERT INTO 
+		tbl_news( nno, title, content, writer, href, img, regdate ) VALUES <foreach 
+		item="item" index="index" collection="list"> ( seq_news.nextval, #{item.title}, 
+		#{item.content}, #{item.writingSource}, #{item.href}, #{item.img}, #{item.date} 
+		) </foreach> </insert> -->
 </mapper>
