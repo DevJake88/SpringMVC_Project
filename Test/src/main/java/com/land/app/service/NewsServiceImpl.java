@@ -26,4 +26,9 @@ public class NewsServiceImpl implements NewsService {
 	public void insertList(List<NewsVO> newsList) {
 		newsDao.insertList(newsList);
 	}
+
+	@Override
+	public List getAdditionalNewsList(int page) {
+		return newsDao.getAdditionalNewsList(page);
+	}
 }

@@ -25,5 +25,9 @@ public class NewsDAOImpl implements NewsDAO {
 		sqlSession.insert("news.insertList", newsList);
 	}
 
+	@Override
+	public List<NewsVO> getAdditionalNewsList(int page) {
+		return sqlSession.selectList("news.getAdditionalList", page);
+	}
 	
 }

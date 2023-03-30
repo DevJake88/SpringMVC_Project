@@ -4,8 +4,24 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="news"> <!-- Repository와 연동을 위해 사용될 namespace -->
 	<select id="getList" resultType="com.land.app.vo.NewsVO"> <!-- 조회된 값을 Cart클래스에 담아 return -->
-		select *
-		from tbl_news
+		<![CDATA[
+			select *
+			from tbl_news
+			where rownum <= 5
+		]]>
+	</select>
+	
+	<select id="getAdditionalList" resultType="com.land.app.vo.NewsVO" parameterType="Integer"> <!-- 조회된 값을 Cart클래스에 담아 return -->
+		<![CDATA[
+			select * from
+			(
+				select rownum as rn, tbl_news.*
+				from tbl_news
+				where rownum <= (5 * #{page})
+			)
+			where rn > (5 * (#{page}-1))
+			
+		]]>
 	</select>
 
 	<insert id="insertList" parameterType="java.util.List">

@@ -7,4 +7,5 @@ import com.land.app.vo.NewsVO;
 public interface NewsService {
 	public List getNewsList();
 	public void insertList(List<NewsVO> newsList);
+	public List getAdditionalNewsList(int page);
 }

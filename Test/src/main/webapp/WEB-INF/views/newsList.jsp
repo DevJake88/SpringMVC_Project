@@ -33,6 +33,20 @@ hr {
 	
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+	let paging = 1
+	function handleClick() {
+		console.log('onClick')
+		$.get("/newsPlus", {
+			'data': paging,
+		},function(data, status) {
+			console.log('data: ', data)
+			paging++
+		})
+	}
+
+</script>
 </head>
 <body>
 	<h1>newsList</h1>
@@ -48,7 +62,7 @@ hr {
 			</article>
 			<hr />
 		</c:forEach>
-		
+		<button onClick="handleClick()">Click</button>
 	</main>
 	<%-- <c:forEach var="news" items="${newsList }">
 		<a href="${news.href}" target="blank">
