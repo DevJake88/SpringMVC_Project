@@ -16,6 +16,10 @@ article {
 	justify-content: center;
 	padding: 10px 0;
 }
+a {
+	color: unset;
+    text-decoration: none;
+}
 h3 {
 	font-size: 20px;
 }
@@ -55,13 +59,15 @@ hr {
 				const img = data.list[i].img
 				
 				const element =
-					'<article>' +
-						'<div class="txt_area">' +
-							'<h3>' + title + '</h3>' +
-							'<p>' + content + '</p>' +
-						'</div>' +
-						'<img src=' + img + 'alt="이미지" />' +
-					'</article>' + 
+					'<a href=' + href + ' target="_blank">' +
+						'<article>' +
+							'<div class="txt_area">' +
+								'<h3>' + title + '</h3>' +
+								'<p>' + content + '</p>' +
+							'</div>' +
+							'<img src=' + img + 'alt="이미지" />' +
+						'</article>' + 
+					'</a>' +
 					'<hr />'
 				
 				articleElement += element
@@ -78,25 +84,20 @@ hr {
 	<hr />
 	<main>
 		<c:forEach var="news" items="${newsList }">
-			<article>
-				<div class="txt_area">
-					<h3>${news.title}</h3>
-					<p>${news.content}</p>
-				</div>
-				<img src="${news.img}" alt="이미지" />
-			</article>
+			<a href="${news.href}" target="_blank">
+				<article>
+					<div class="txt_area">
+						<h3>${news.title}</h3>
+						<p>${news.content}</p>
+					</div>
+					<img src="${news.img}" alt="이미지" />
+				</article>
+			</a>
 			<hr />
 		</c:forEach>
 		<div class="button_wrapper">
 			<button onClick="handleClick()">뉴스 더보기</button>		
 		</div>
 	</main>
-	<%-- <c:forEach var="news" items="${newsList }">
-		<a href="${news.href}" target="blank">
-			<h2>${news.title}</h2> <img src="${news.img}" />
-			<p>${news.content}</p>
-			<span>${news.writingSource}</span>
-		</a>
-	</c:forEach> --%>
 </body>
 </html>
