@@ -32,20 +32,45 @@ img {
 hr {
 	
 }
+.button_wrapper {
+	display: flex;
+	justify-content: center;
+	margin: 48px 0;
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
-	let paging = 1
+	let paging = 2
 	function handleClick() {
-		console.log('onClick')
 		$.get("/newsPlus", {
 			'data': paging,
 		},function(data, status) {
-			console.log('data: ', data)
 			paging++
+			
+			let articleElement = ""
+			for(let i=0; i<data.list.length; i++) {
+				const title = data.list[i].title
+				const content = data.list[i].content
+				const href = data.list[i].href
+				const img = data.list[i].img
+				
+				const element =
+					'<article>' +
+						'<div class="txt_area">' +
+							'<h3>' + title + '</h3>' +
+							'<p>' + content + '</p>' +
+						'</div>' +
+						'<img src=' + img + 'alt="이미지" />' +
+					'</article>' + 
+					'<hr />'
+				
+				articleElement += element
+			}
+			
+			// html 붙이기
+			$("hr").last().after(articleElement)
 		})
 	}
-
 </script>
 </head>
 <body>
@@ -62,7 +87,9 @@ hr {
 			</article>
 			<hr />
 		</c:forEach>
-		<button onClick="handleClick()">Click</button>
+		<div class="button_wrapper">
+			<button onClick="handleClick()">뉴스 더보기</button>		
+		</div>
 	</main>
 	<%-- <c:forEach var="news" items="${newsList }">
 		<a href="${news.href}" target="blank">

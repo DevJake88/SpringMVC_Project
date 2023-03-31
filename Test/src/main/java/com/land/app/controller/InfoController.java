@@ -45,7 +45,6 @@ public class InfoController {
 	public ModelAndView getAdditionalNewsList(@RequestParam(value="data") int page) {
 		ModelAndView model = new ModelAndView("jsonView");
 		model.addObject("list", newsService.getAdditionalNewsList(page));
-		System.out.println("page : " + page);
 		return model;
 	}
 }
